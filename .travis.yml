@@ -1,0 +1,23 @@
+sudo: required
+dist: trusty
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+language: node_js
+node_js:
+  - "9"
+before_install:
+    - "npm config set spin false"
+    - "npm install -g npm@^5"
+install:
+    - npm install
+script:
+    - npm install codecov -g
+    - npm run test
+after_success:
+    - codecov
+build: 
+    - npm run build:babel

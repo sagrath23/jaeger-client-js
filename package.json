@@ -1,0 +1,48 @@
+{
+  "name": "jaeger-client-js",
+  "version": "1.0.0",
+  "description": "jaegertracing tracer implementation in JS",
+  "main": "src/index.js",
+  "scripts": {
+    "prestart": "npm run build:babel",
+    "start": "node dist",
+    "start:dev:local": "nodemon -w src --exec \"npm start\"",
+    "start:dev": "npm run start:jaeger && nodemon -w src --exec \"npm start\"",
+    "build:babel": "npx babel src --out-dir dist",
+    "test": "npx jest --coverage && cat ./coverage/lcov.info | codacy-coverage --accountToken Td3mbY6aY0Gc0OZH2oDJ --username sagrath23 --projectName jaegertracing-demo"
+  },
+  "keywords": [
+    "babel"
+  ],
+  "repository": "https://github.com/sagrath23/jaeger-client-js",
+  "author": "Steven Augusto Villegas Castellanos",
+  "license": "MIT",
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/dist/",
+      "/node_modules/"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.1",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "codacy-coverage": "^3.1.0",
+    "eslint": "^5.5.0",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.4",
+    "regenerator-runtime": "^0.12.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "jaeger-client": "^3.12.0",
+    "opentracing": "^0.14.3",
+    "superagent": "^4.0.0-beta.5"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
+  }
+}
