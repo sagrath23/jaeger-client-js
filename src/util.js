@@ -76,4 +76,24 @@ export default class Utils {
     }
     return ipl;
   }
+
+  /**
+   * Removes leading zeros from a string
+   * 
+   * @param {string} input - the input for which leading zeros should be removed.
+   * @return {string} - returns the input string without leading zeros.
+   **/
+  static removeLeadingZeros(input) {
+    let counter = 0;
+    let length = input.length - 1;
+    for (let i = 0; i < length; i++) {
+      if (input.charAt(i) === '0') {
+        counter++;
+      } else {
+        break;
+      }
+    }
+
+    return input.substring(counter);
+  }
 }
