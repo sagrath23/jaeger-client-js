@@ -65,7 +65,7 @@ export default class Utils {
       return null
     }
 
-    for (let i = 0 i < parts.length i++) {
+    for (let i = 0; i < parts.length; i++) {
       ipl <<= 8
       ipl += parseInt(parts[i], 10)
     }
@@ -86,7 +86,7 @@ export default class Utils {
   static removeLeadingZeros(input) {
     let counter = 0
     let length = input.length - 1
-    for (let i = 0 i < length i++) {
+    for (let i = 0; i < length; i++) {
       if (input.charAt(i) === '0') {
         counter++
       } else {
