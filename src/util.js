@@ -49,7 +49,7 @@ export default class Utils {
    * @return {Buffer} - returns a buffer representing the encoded string, or number.
    **/
   static encodeInt64(numberValue) {
-    return new Int64(numberValue).toBuffer();
+    return new Int64(numberValue).toBuffer()
   }
 
   /**
@@ -59,22 +59,22 @@ export default class Utils {
   * octect of an ip address.
   **/
   static ipToInt(ip) {
-    let ipl = 0;
-    let parts = ip.split('.');
+    let ipl = 0
+    let parts = ip.split('.')
     if (parts.length != 4) {
-      return null;
+      return null
     }
 
-    for (let i = 0; i < parts.length; i++) {
-      ipl <<= 8;
-      ipl += parseInt(parts[i], 10);
+    for (let i = 0 i < parts.length i++) {
+      ipl <<= 8
+      ipl += parseInt(parts[i], 10)
     }
 
-    let signedLimit = 0x7fffffff;
+    let signedLimit = 0x7fffffff
     if (ipl > signedLimit) {
-      return (1 << 32) - ipl;
+      return (1 << 32) - ipl
     }
-    return ipl;
+    return ipl
   }
 
   /**
@@ -84,17 +84,17 @@ export default class Utils {
    * @return {string} - returns the input string without leading zeros.
    **/
   static removeLeadingZeros(input) {
-    let counter = 0;
-    let length = input.length - 1;
-    for (let i = 0; i < length; i++) {
+    let counter = 0
+    let length = input.length - 1
+    for (let i = 0 i < length i++) {
       if (input.charAt(i) === '0') {
-        counter++;
+        counter++
       } else {
-        break;
+        break
       }
     }
 
-    return input.substring(counter);
+    return input.substring(counter)
   }
 
   static myIp() {
@@ -102,25 +102,25 @@ export default class Utils {
   }
 
   static clone(obj) {
-    let newObj = {};
+    let newObj = {}
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
-        newObj[key] = obj[key];
+        newObj[key] = obj[key]
       }
     }
 
-    return newObj;
+    return newObj
   }
 
   static convertObjectToTags(dict) {
-    let tags = [];
+    let tags = []
     for (let key in dict) {
-      let value = dict[key];
+      let value = dict[key]
       if (dict.hasOwnProperty(key)) {
-        tags.push({ key: key, value: value });
+        tags.push({ key: key, value: value })
       }
     }
 
-    return tags;
+    return tags
   }
 }
