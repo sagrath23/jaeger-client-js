@@ -52,12 +52,12 @@ export default class Utils {
     return new Int64(numberValue).toBuffer();
   }
 
-   /**
-   * Convert an IP address into a int 
-   * @param {string} ip - a string representation of an ip address.
-   * @return {number} - a 32-bit number where each byte represents an
-   * octect of an ip address.
-   **/
+  /**
+  * Convert an IP address into a int 
+  * @param {string} ip - a string representation of an ip address.
+  * @return {number} - a 32-bit number where each byte represents an
+  * octect of an ip address.
+  **/
   static ipToInt(ip) {
     let ipl = 0;
     let parts = ip.split('.');
@@ -95,5 +95,32 @@ export default class Utils {
     }
 
     return input.substring(counter);
+  }
+
+  static myIp() {
+    // TODO: Add implementation
+  }
+
+  static clone(obj) {
+    let newObj = {};
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        newObj[key] = obj[key];
+      }
+    }
+
+    return newObj;
+  }
+
+  static convertObjectToTags(dict) {
+    let tags = [];
+    for (let key in dict) {
+      let value = dict[key];
+      if (dict.hasOwnProperty(key)) {
+        tags.push({ key: key, value: value });
+      }
+    }
+
+    return tags;
   }
 }
