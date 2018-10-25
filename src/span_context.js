@@ -2,15 +2,15 @@ import * as constants from './constants'
 import Utils from './util'
 
 export default class SpanContext {
-  _traceId;
-  _spanId;
-  _parentId;
-  _traceIdStr;
-  _spanIdStr;
-  _parentIdStr;
-  _flags;
-  _baggage;
-  _debugId;
+  _traceId
+  _spanId
+  _parentId
+  _traceIdStr
+  _spanIdStr
+  _parentIdStr
+  _flags
+  _baggage
+  _debugId
 
   /**
    * This field exists to help distinguish between when a span can have a properly
@@ -28,7 +28,7 @@ export default class SpanContext {
    * - it is used as a parent for another span
    * - its context is serialized using injectors
    * */
-  _samplingFinalized;
+  _samplingFinalized
 
   constructor(
     traceId,
@@ -42,119 +42,119 @@ export default class SpanContext {
     debugId = '',
     samplingFinalized = false
   ) {
-    this._traceId = traceId;
-    this._spanId = spanId;
-    this._parentId = parentId;
-    this._traceIdStr = traceIdStr;
-    this._spanIdStr = spanIdStr;
-    this._parentIdStr = parentIdStr;
-    this._flags = flags;
-    this._baggage = baggage;
-    this._debugId = debugId;
-    this._samplingFinalized = samplingFinalized;
+    this._traceId = traceId
+    this._spanId = spanId
+    this._parentId = parentId
+    this._traceIdStr = traceIdStr
+    this._spanIdStr = spanIdStr
+    this._parentIdStr = parentIdStr
+    this._flags = flags
+    this._baggage = baggage
+    this._debugId = debugId
+    this._samplingFinalized = samplingFinalized
   }
 
   get traceId() {
-    return this._traceId;
+    return this._traceId
   }
 
   set traceId(value) {
-    this._traceId = value;
+    this._traceId = value
   }
 
   get spanId() {
-    return this._spanId;
+    return this._spanId
   }
 
   set spanId(value) {
-    this._spanId = value;
+    this._spanId = value
   }
 
   get parentId() {
-    return this._parentId;
+    return this._parentId
   }
 
   set parentId(value) {
-    this._parentId = value;
+    this._parentId = value
   }
 
   get traceIdStr() {
-    return this._traceIdStr;
+    return this._traceIdStr
   }
 
   set traceIdStr(value) {
-    this._traceIdStr = value;
+    this._traceIdStr = value
   }
 
   get spanIdStr() {
-    return this._spanIdStr;
+    return this._spanIdStr
   }
 
   set spanIdStr(value) {
-    this._spanIdStr = value;
+    this._spanIdStr = value
   }
   
   get parentIdStr() {
-    return this._parentIdStr;
+    return this._parentIdStr
   }
 
   set parentIdStr(value) {
-    this._parentIdStr = value;
+    this._parentIdStr = value
   }
 
   get flags() {
-    return this._flags;
+    return this._flags
   }
 
   set flags(value) {
-    this._flags = value;
+    this._flags = value
   }
 
   get baggage() {
-    return this._baggage;
+    return this._baggage
   }
 
   set baggage(value) {
-    this._baggage = value;
+    this._baggage = value
   }
 
   get debugId() {
-    return this._debugId;
+    return this._debugId
   }
 
   set debugId(value) {
-    this._debugId = value;
+    this._debugId = value
   }
 
   get isValid() {
-    return !!((this._traceId || this._traceIdStr) && (this._spanId || this._spanIdStr));
+    return !!((this._traceId || this._traceIdStr) && (this._spanId || this._spanIdStr))
   }
 
   finalizeSampling() {
-    this._samplingFinalized = true;
+    this._samplingFinalized = true
   }
 
   isDebugIDContainerOnly() {
-    return !this.isValid && this._debugId !== '';
+    return !this.isValid && this._debugId !== ''
   }
 
   /**
    * @return {boolean} - returns whether or not this span context was sampled.
    **/
   isSampled() {
-    return (this.flags & constants.SAMPLED_MASK) === constants.SAMPLED_MASK;
+    return (this.flags & constants.SAMPLED_MASK) === constants.SAMPLED_MASK
   }
 
   /**
    * @return {boolean} - returns whether or not this span context has a debug flag set.
    **/
   isDebug() {
-    return (this.flags & constants.DEBUG_MASK) === constants.DEBUG_MASK;
+    return (this.flags & constants.DEBUG_MASK) === constants.DEBUG_MASK
   }
 
   withBaggageItem(key, value) {
-    let newBaggage = Utils.clone(this._baggage);
-    newBaggage[key] = value;
+    let newBaggage = Utils.clone(this._baggage)
+    newBaggage[key] = value
     return new SpanContext(
       this._traceId,
       this._spanId,
@@ -166,14 +166,14 @@ export default class SpanContext {
       newBaggage,
       this._debugId,
       this._samplingFinalized
-    );
+    )
   }
 
   /**
    * @return {string} - returns a string version of this span context.
    **/
   toString() {
-    return [this.traceIdStr, this.spanIdStr, this.parentIdStr || '0', this._flags.toString(16)].join(':');
+    return [this.traceIdStr, this.spanIdStr, this.parentIdStr || '0', this._flags.toString(16)].join(':')
   }
 
   /**
@@ -181,9 +181,9 @@ export default class SpanContext {
    * @return {SpanContext} - returns a span context represented by the serializedString.
    **/
   static fromString(serializedString) {
-    let headers = serializedString.split(':');
+    let headers = serializedString.split(':')
     if (headers.length !== 4) {
-      return null;
+      return null
     }
 
     // Note: Number type in JS cannot represent the full range of 64bit unsigned ints,
@@ -192,24 +192,24 @@ export default class SpanContext {
     // returned value, we are only using it to validate that the string is
     // a valid hex number (which is faster than doing it manually).  We cannot use
     // Int64(numberValue).toBuffer() because it throws exceptions on bad strings.
-    let approxTraceId = parseInt(headers[0], 16);
+    let approxTraceId = parseInt(headers[0], 16)
     let NaNDetected =
       isNaN(approxTraceId) ||
       approxTraceId === 0 ||
       isNaN(parseInt(headers[1], 16)) ||
       isNaN(parseInt(headers[2], 16)) ||
-      isNaN(parseInt(headers[3], 16));
+      isNaN(parseInt(headers[3], 16))
 
     if (NaNDetected) {
-      return null;
+      return null
     }
 
-    let parentId = null;
+    let parentId = null
     if (headers[2] !== '0') {
-      parentId = headers[2];
+      parentId = headers[2]
     }
 
-    return SpanContext.withStringIds(headers[0], headers[1], parentId, parseInt(headers[3], 16));
+    return SpanContext.withStringIds(headers[0], headers[1], parentId, parseInt(headers[3], 16))
   }
 
   static withBinaryIds(
@@ -230,7 +230,7 @@ export default class SpanContext {
       flags,
       baggage,
       debugId
-    );
+    )
   }
 
   static withStringIds(
@@ -251,6 +251,6 @@ export default class SpanContext {
       flags,
       baggage,
       debugId
-    );
+    )
   }
 }
