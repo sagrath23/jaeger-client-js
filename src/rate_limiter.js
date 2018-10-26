@@ -24,8 +24,8 @@ export default class RateLimiter {
     this._updateBalance()
     this._creditsPerSecond = creditsPerSecond
     // The new balance should be proportional to the old balance.
-    this._balance = maxBalance * this._balance / this._maxBalance;
-    this._maxBalance = maxBalance;
+    this._balance = maxBalance * this._balance / this._maxBalance
+    this._maxBalance = maxBalance
   }
 
   checkCredit(itemCost) {
