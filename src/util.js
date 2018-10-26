@@ -61,7 +61,7 @@ export default class Utils {
   static ipToInt(ip) {
     let ipl = 0
     let parts = ip.split('.')
-    if (parts.length != 4) {
+    if (parts.length !== 4) {
       return null
     }
 
@@ -115,12 +115,14 @@ export default class Utils {
   static convertObjectToTags(dict) {
     let tags = []
     for (let key in dict) {
-      let value = dict[key]
-      if (dict.hasOwnProperty(key)) {
-        tags.push({ 
-          key,
-          value
-        })
+      if(dict[key]){
+        let value = dict[key]
+        if (dict.hasOwnProperty(key)) {
+          tags.push({
+            key,
+            value
+          })
+        }
       }
     }
 
