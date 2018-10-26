@@ -117,7 +117,10 @@ export default class Utils {
     for (let key in dict) {
       let value = dict[key]
       if (dict.hasOwnProperty(key)) {
-        tags.push({ key: key, value: value })
+        tags.push({ 
+          key,
+          value
+        })
       }
     }
 
