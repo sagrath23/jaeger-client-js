@@ -7,15 +7,15 @@ export default class Restriction {
   _maxValueLength
 
   constructor(keyAllowed, maxValueLength) {
-    this._keyAllowed = keyAllowed;
-    this._maxValueLength = maxValueLength;
+    this._keyAllowed = keyAllowed
+    this._maxValueLength = maxValueLength
   }
 
   get keyAllowed() {
-    return this._keyAllowed;
+    return this._keyAllowed
   }
 
   get maxValueLength() {
-    return this._maxValueLength;
+    return this._maxValueLength
   }
 }

@@ -1,6 +1,6 @@
 import Restriction from './restriction'
 
-export const DEFAULT_MAX_VALUE_LENGTH = 2048;
+export const DEFAULT_MAX_VALUE_LENGTH = 2048
 
 /**
  * Creates a BaggageRestrictionManager that allows any baggage key.
@@ -14,6 +14,6 @@ export default class DefaultBaggageRestrictionManager {
   }
 
   getRestriction(service, key) {
-    return this._restriction;
+    return this._restriction
   }
 }
