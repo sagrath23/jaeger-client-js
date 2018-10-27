@@ -51,8 +51,8 @@ export default class Tracer {
   ) {
     this._tags = options.tags || {}
     this._tags[constants.JAEGER_CLIENT_VERSION_TAG_KEY] = `Node-${pjson.version}`
-    this._tags[constants.TRACER_HOSTNAME_TAG_KEY] = os.hostname()
-    this._tags[constants.PROCESS_IP] = Utils.ipToInt(Utils.myIp())
+    this._tags[constants.TRACER_HOSTNAME_TAG_KEY] = os.hostname() // TODO: figure out how to replace this
+    this._tags[constants.PROCESS_IP] = Utils.ipToInt(Utils.myIp()) // TODO: implement this function in Util class
 
     this._metrics = options.metrics || new Metrics(new NoopMetricFactory())
 
