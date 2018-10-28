@@ -104,7 +104,7 @@ export default class RemoteThrottler {
   }
 
   _incrementCredits(creditResponses) {
-    creditResponses.forEach(r => {
+    creditResponses.forEach((r) => {
       this._credits[r.operation] = this._credits[r.operation] + r.balance
     })
   }
@@ -115,10 +115,10 @@ export default class RemoteThrottler {
     const ops = operations.map(encodeURIComponent).join('&operations=')
     const url = `/credits?service=${serviceName}&uuid=${uuid}&operations=${ops}`
 
-    const success = body => {
+    const success = (body) => {
       this._parseCreditResponse(body)
     }
-    const error = err => {
+    const error = (err) => {
       this._logger.error(`Error in fetching credits: ${err}.`)
       this._metrics.throttlerUpdateFailure.increment(1)
     }

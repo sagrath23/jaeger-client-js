@@ -31,7 +31,7 @@ export default class PerOperationSampler {
 
     let updated = this._defaultLowerBound !== strategies.defaultLowerBoundTracesPerSecond
     this._defaultLowerBound = strategies.defaultLowerBoundTracesPerSecond
-    strategies.perOperationStrategies.forEach(strategy => {
+    strategies.perOperationStrategies.forEach((strategy) => {
       let operation = strategy.operation
       let samplingRate = strategy.probabilisticSampling.samplingRate
       let sampler = this._samplersByOperation[operation]

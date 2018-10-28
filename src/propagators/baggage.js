@@ -10,7 +10,7 @@
  * to parse
  */
 export function parseCommaSeparatedBaggage(baggage, values) {
-  values.split(',').forEach(keyVal => {
+  values.split(',').forEach((keyVal) => {
     let splitKeyVal = keyVal.trim().split('=')
     if (splitKeyVal.length == 2) {
       baggage[splitKeyVal[0]] = splitKeyVal[1]

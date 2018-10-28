@@ -1,6 +1,6 @@
 export default class BinaryCodec {
   extract(carrier) {
-    return null;
+    return null
   }
 
   inject(spanContext, carrier){}

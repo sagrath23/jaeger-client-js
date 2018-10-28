@@ -3,7 +3,7 @@ import ConstSampler from './samplers/const_sampler'
 import * as constants from './constants'
 import * as opentracing from 'opentracing'
 import pjson from '../package.json'
-import { Tags as opentracing_tags } from 'opentracing'
+import { Tags as opentracingTags } from 'opentracing'
 import NoopReporter from './reporters/noop_reporter'
 import Span from './span'
 import SpanContext from './span_context'
@@ -91,9 +91,9 @@ export default class Tracer {
     const uuid = uuidv4()
     this._tags[constants.TRACER_CLIENT_ID_TAG_KEY] = uuid
     this._process = {
-      serviceName: serviceName,
+      serviceName,
       tags: Utils.convertObjectToTags(this._tags),
-      uuid: uuid,
+      uuid,
     }
     this._debugThrottler.setProcess(this._process)
     // TODO update reporter to implement ProcessSetter
@@ -201,8 +201,8 @@ export default class Tracer {
       }
     }
 
-    let spanKindValue = userTags[opentracing_tags.SPAN_KIND]
-    let rpcServer = spanKindValue === opentracing_tags.SPAN_KIND_RPC_SERVER
+    let spanKindValue = userTags[opentracingTags.SPAN_KIND]
+    let rpcServer = spanKindValue === opentracingTags.SPAN_KIND_RPC_SERVER
 
     let ctx = new SpanContext()
     let internalTags = {}
