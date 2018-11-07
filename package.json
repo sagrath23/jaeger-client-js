@@ -7,7 +7,7 @@
     "prestart": "npm run build:babel",
     "start": "node dist",
     "start:dev:local": "nodemon -w src --exec \"npm start\"",
-    "start:dev": "npm run start:jaeger && nodemon -w src --exec \"npm start\"",
+    "start:dev": "nodemon -w src --exec \"npm start\"",
     "build:babel": "npx babel src --out-dir dist",
     "test": "npx jest --coverage && cat ./coverage/lcov.info | codacy-coverage --accountToken Td3mbY6aY0Gc0OZH2oDJ --username sagrath23 --projectName jaeger-client-js"
   },
